@@ -1,9 +1,9 @@
 import React, { useState, useCallback, useEffect, useRef } from 'react'
-import { Drawer } from 'yasuo'
+import { Drawer, Button } from 'components'
 
 export default function (props) {
   const url = 'http://b-ssl.duitang.com/uploads/item/201303/10/20130310164519_L4ZMz.jpeg'
-  const self = useRef({})
+  const inputRef = useRef(null)
 
   useEffect(() => {
 
@@ -17,7 +17,17 @@ export default function (props) {
       backgroundSize: 'cover',
       backgroundPosition: 'center'
     }}>
-      <Drawer />
+      <Drawer placement='top'>
+        <div style={{ height: 50, background: 'orange' }}>
+
+        </div>
+      </Drawer>
+      {/* <input ref={inputRef} type='file' onChange={(e) => {
+        console.log(e)
+      }} />
+      <Button title='button' onClick={() => {
+        inputRef.current.click()
+      }} /> */}
     </div>
   )
 }
