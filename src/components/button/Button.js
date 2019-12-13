@@ -12,13 +12,20 @@ export default function Button(props) {
     return icon ? <Icon type={icon} /> : ''
   }, [icon])
 
-  return (
-    <Wave>
+  function renderButton() {
+    return (
       <button {...otherProps} style={style} disabled={disabled} className={`${styles['btn-container']} ${styles[type]} btn`} onClick={onClick}>
         {iconNode}
         {React.createElement('span', {}, children)}
       </button>
-    </Wave>
+    )
+  }
+
+  return (
+    type === 'borderless' ? renderButton() :
+      <Wave>
+        {renderButton()}
+      </Wave>
   )
 }
 
@@ -26,7 +33,8 @@ Button.propTypes = {
   onClick: PropTypes.func,
   disabled: PropTypes.bool,
   style: PropTypes.object,
-  type: PropTypes.oneOf(['primary', 'default'])
+  type: PropTypes.oneOf(['primary', 'default', 'borderless']),
+  icon: PropTypes.string
 }
 
 Button.defaultProps = {

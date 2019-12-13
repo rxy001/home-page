@@ -17,7 +17,6 @@ export default function request(options) {
     if (xhr.status < 200 || xhr.status >= 300) {
       console.log('loaderror', options, xhr)
     }
-    console.log('load', options, xhr)
   })
   xhr.open(options.method, options.action, true);
   xhr.withCredentials = true;

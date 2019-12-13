@@ -2,11 +2,11 @@ import React, { useRef, useCallback } from 'react'
 import { Button } from '../'
 import styles from './style.module.css'
 import { request, getUid } from '../utils'
+import PropTypes from 'prop-types'
 
 export default function Upload(props) {
-
   const inputRef = useRef(null)
-  const self = useRef({})
+  const requests = useRef({})
 
   const btnOnClick = useCallback(() => {
     inputRef.current.click()
@@ -38,7 +38,7 @@ export default function Upload(props) {
         }
         post(file)
       }).catch((err) => {
-        console.error(err)
+        err && console.error(err)
       })
     }
   })
@@ -53,13 +53,15 @@ export default function Upload(props) {
       name: file.name,
       onProgress: () => { },
       onError: () => { },
-      onSuccess: () => { }
+      onSuccess: () => {
+        props.onSuccess(file)
+      }
     }
-    self.current.requests[file.uid] = request(options)
+    requests.current[file.uid] = request(options)
   })
 
   return (
-    <Button icon='icondownload' onClick={btnOnClick}>
+    <Button icon='icondownload' onClick={btnOnClick} {...props.buttonProps}>
       <div className={styles['upload-container']}>
         <span>上传</span>
         <input className={styles.fileInput} multiple={props.multiple} ref={inputRef} type='file' onChange={(e) => {
@@ -68,4 +70,21 @@ export default function Upload(props) {
       </div>
     </Button>
   )
+}
+
+Upload.propTypes = {
+  multiple: PropTypes.bool,
+  action: PropTypes.string.isRequired,
+  method: PropTypes.string,
+  headers: PropTypes.object,
+  onSuccess: PropTypes.func,
+  beforeUpload: PropTypes.func,
+  buttonProps: PropTypes.object
+}
+Upload.defaultProps = {
+  multiple: false,
+  onSuccess: () => { },
+  method: 'post',
+  headers: null,
+  buttonProps: {}
 }

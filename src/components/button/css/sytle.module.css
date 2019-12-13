@@ -1,17 +1,26 @@
 .btn-container {
     outline: 0;
     border-radius: 4px;
-    font-size: 16px;
     line-height: 1;
     padding: 0 15px;
     height: 32px;
 }
 
+.borderless {
+    background: transparent;
+    color: rgba(0, 0, 0, 0.65);
+    border: none;
+}
+
+.borderless:hover, .borderless:focus {
+    font-weight: 600;
+}
+
 .default {
     border: 1px solid #d9d9d9;
     background: #fff;
-    color: rgba(0,0,0,0.65);
-    box-shadow: 0 2px 0 rgba(0,0,0,0.015)
+    color: rgba(0, 0, 0, 0.65);
+    box-shadow: 0 2px 0 rgba(0, 0, 0, 0.015)
 }
 
 .primary {
@@ -20,13 +29,13 @@
     color: #fff;
 }
 
-.primary:hover, .primary:focus  {
+.primary:hover, .primary:focus {
     background: #40a9ff;
     border-color: #40a9ff;
     color: #fff;
 }
 
-.default:hover, .default:focus  {
+.default:hover, .default:focus {
     background: #fff;
     border-color: #40a9ff;
     color: #40a9ff;
@@ -35,7 +44,7 @@
 .primary:active {
     background-color: #1676ce;
     border-color: #1676ce;
-    transition-property: background-color,border-color;
+    transition-property: background-color, border-color;
     transition-duration: 500ms;
     transition-timing-function: ease;
     text-shadow: none;
@@ -45,10 +54,9 @@
 .default:active {
     color: #1676ce;
     border-color: #1676ce;
-    transition-property: color,border-color;
+    transition-property: color, border-color;
     transition-duration: 500ms;
     transition-timing-function: ease;
     text-shadow: none;
     box-shadow: none;
 }
-
