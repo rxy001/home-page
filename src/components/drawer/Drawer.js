@@ -44,22 +44,46 @@ export default function Drawer(props) {
     }
   }, [childrenRef])
 
+  const horizontal = useMemo(() => {
+    if (['top', 'bottom'].includes(placement)) {
+      return false
+    } else if (['left', 'right'].includes(placement)) {
+      return true
+    }
+  }, [placement])
+
+  const translate = useCallback((dis) => {
+    return `translate${horizontal ? 'X' : 'Y'}(${dis})`
+  }, [horizontal])
+
+  const initialDis = useCallback(() => {
+    switch (placement) {
+      case 'left':
+      case 'top':
+        return '-100%';
+      case 'right':
+      case 'bottom':
+        return '100%'
+    }
+  }, [placement])
+
   const defaultStyle = useMemo(() => ({
-    transition: `${placement} ${duration}ms ease-in-out`,
-    [placement]: '-100%',
-    width: ['top', 'bottom'].includes(placement) ? '100%' : 'auto',
-    height: ['left', 'right'].includes(placement) ? '100%' : 'auto',
+    transition: `transform ${duration}ms linear`,
+    [placement]: '0',
+    width: horizontal ? 'auto' : '100%',
+    height: horizontal ? '100%' : 'auto',
     background: '#d2d2d238',
     position: 'fixed',
-    overflow: 'hidden'
-  }), [placement, duration])
+    overflow: 'hidden',
+    transform: translate(initialDis())
+  }), [placement, duration, initialDis, horizontal])
 
   const transitionStyles = useMemo(() => ({
-    entering: { [placement]: 0 },
-    entered: { [placement]: 0 },
-    exiting: { [placement]: '-100%' },
-    exited: { [placement]: '-100%' },
-  }), [placement])
+    entering: { transform: translate(0) },
+    entered: { transform: translate(0) },
+    exiting: { transform: translate(initialDis()) },
+    exited: { transform: translate(initialDis()) },
+  }), [translate, initialDis])
 
   const renderChildren = useCallback(() => {
     if (React.isValidElement(children)) {
@@ -70,15 +94,13 @@ export default function Drawer(props) {
     return (
       <div ref={childrenRef}></div>
     )
-  }, [children])
+  }, [children, childrenRef])
 
   const visibleChange = useCallback(() => {
     if (typeof afterVisibleChange === 'function') {
       afterVisibleChange(visible)
     }
   }, [afterVisibleChange, visible])
-
-  console.log('render')
 
   return (
     <Transition
@@ -92,7 +114,7 @@ export default function Drawer(props) {
           ref={barRef}
           style={{
             ...defaultStyle,
-            ...transitionStyles[state]
+            ...transitionStyles[state],
           }}>
           {
             renderChildren()
