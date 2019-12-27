@@ -1,0 +1,25 @@
+.home-page-menu {
+  display: inline-block;
+  /* border: 1px solid #bdbdbd; */
+  border-radius: 5px;
+  position: fixed;
+  top: 140px;
+  left: 100px;
+}
+
+.home-page-menu-item {
+  /* padding: 7px 13px; */
+  /* border-bottom: 1px solid #bdbdbd; */
+  font-size: 14px;
+  display: inline-block;
+  cursor: pointer;
+  user-select: none;
+  color: #fff;
+  font-weight: bold;
+  height: 20px;
+  padding: 6px 10px;
+}
+
+.home-page-menu-item:last-child {
+  border: none;
+}

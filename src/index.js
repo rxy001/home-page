@@ -4,7 +4,7 @@ import './index.css';
 import './axios';
 import App from './view/App';
 import * as serviceWorker from './serviceWorker';
-import 'antd/dist/antd.css';
+// import 'antd/dist/antd.css';
 
 ReactDOM.render(<App />, document.getElementById('root'));
 

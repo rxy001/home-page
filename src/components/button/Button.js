@@ -6,7 +6,7 @@ import { Icon } from '../'
 
 export default function Button(props) {
 
-  const { disabled, style, onClick, type, icon, children, ...otherProps } = props
+  const { disabled, style, onClick, type, icon, children, htmlType, ...otherProps } = props
 
   const iconNode = useMemo(() => {
     return icon ? <Icon type={icon} /> : ''
@@ -14,7 +14,7 @@ export default function Button(props) {
 
   function renderButton() {
     return (
-      <button {...otherProps} style={style} disabled={disabled} className={`${styles['btn-container']} ${styles[type]} btn`} onClick={onClick}>
+      <button type={htmlType} {...otherProps} style={style} disabled={disabled} className={`${styles['btn-container']} ${styles[type]} btn`} onClick={onClick}>
         {iconNode}
         {React.createElement('span', {}, children)}
       </button>
@@ -34,13 +34,15 @@ Button.propTypes = {
   disabled: PropTypes.bool,
   style: PropTypes.object,
   type: PropTypes.oneOf(['primary', 'default', 'borderless']),
-  icon: PropTypes.string
+  icon: PropTypes.string,
+  htmlType: PropTypes.string,
 }
 
 Button.defaultProps = {
   onClick: () => { },
   disabled: false,
   style: {},
-  type: 'default'
+  type: 'default',
+  htmlType: 'button'
 }
 

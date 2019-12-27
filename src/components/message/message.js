@@ -42,7 +42,6 @@ class Messages {
         this.unMountMessage(props)
       },
       key: getUid(),
-      ...config
     }
     this.messagesList.push(props)
     this.render()

@@ -44,13 +44,13 @@ export default function Upload(props) {
   })
 
   const post = useCallback((file) => {
-    const { action, method, headers } = props
+    const { action, method, headers, name } = props
     const options = {
       action,
       method,
       headers,
       file,
-      name: file.name,
+      name,
       onProgress: () => { },
       onError: () => { },
       onSuccess: () => {
@@ -61,14 +61,19 @@ export default function Upload(props) {
   })
 
   return (
-    <Button icon='icondownload' onClick={btnOnClick} {...props.buttonProps}>
-      <div className={styles['upload-container']}>
-        <span>上传</span>
-        <input className={styles.fileInput} multiple={props.multiple} ref={inputRef} type='file' onChange={(e) => {
+    <div className={styles['upload-container']} onClick={btnOnClick}>
+      {props.children}
+      <input
+        accept={props.accept}
+        className={styles.fileInput}
+        multiple={props.multiple}
+        ref={inputRef}
+        type='file'
+        onChange={(e) => {
           uploadFiles(Array.from(e.target.files))
+          e.target.value = null
         }} />
-      </div>
-    </Button>
+    </div>
   )
 }
 
@@ -79,12 +84,14 @@ Upload.propTypes = {
   headers: PropTypes.object,
   onSuccess: PropTypes.func,
   beforeUpload: PropTypes.func,
-  buttonProps: PropTypes.object
+  name: PropTypes.string,
+  accept: PropTypes.string
 }
 Upload.defaultProps = {
   multiple: false,
   onSuccess: () => { },
   method: 'post',
   headers: null,
-  buttonProps: {}
+  name: 'file',
+  accept: '*'
 }

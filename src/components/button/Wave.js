@@ -27,7 +27,6 @@ export default function Wave(props) {
     if (!e || e.animationName !== 'fadeEffect') {
       return;
     }
-
     resetEffect(e.target, onAnimationStart, onAnimationEnd)
   }, [resetEffect])
 
@@ -35,13 +34,12 @@ export default function Wave(props) {
     const attrName = getAttributeName()
     node.setAttribute(attrName, 'true')
 
-    node.addEventListener('animationstart', onAnimationStart, false)
-    node.addEventListener('animationend', onAnimationEnd, false)
+    node.addEventListener('animationstart', onAnimationStart)
+    node.addEventListener('animationend', onAnimationEnd)
   }, [])
 
   const bindAnimationEvent = useCallback((node) => {
-
-    const listener = () => {
+    const listener = (e) => {
       resetEffect(node, onAnimationStart, onAnimationEnd)
 
       // https://developer.mozilla.org/zh-CN/docs/Web/CSS/CSS_Animations/Tips
@@ -53,10 +51,10 @@ export default function Wave(props) {
       })
     }
 
-    node.addEventListener('click', listener, true)
+    node.addEventListener('click', listener)
 
     return () => {
-      node.removeEventListener('click', listener, true)
+      node.removeEventListener('click', listener)
     }
   }, [onClick, resetEffect, onAnimationStart, onAnimationEnd])
 
