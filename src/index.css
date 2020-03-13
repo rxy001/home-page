@@ -4,3 +4,36 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+div {
+  box-sizing: border-box;
+}
+
+p, h1, h2, h3, h4, h5 {
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+}
+/*正常的未被访问过的链接*/
+a:link {
+  text-decoration: none;
+  color: #000
+}
+/*已经访问过的链接*/
+a:visited {
+  text-decoration: none;
+  color: #000
+
+}
+/*鼠标划过(停留)的链接*/
+a:hover {
+  text-decoration: none;
+  color: #000
+}
+/* 正在点击的链接*/
+a:active {
+  text-decoration: none;
+  color: #000
+}

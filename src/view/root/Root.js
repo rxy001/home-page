@@ -2,89 +2,56 @@ import React, { useState, useCallback, useEffect, useRef } from 'react'
 import { Drawer, Modal, Upload, Button, message, Input } from 'components'
 import axios from 'axios'
 import './css/root.css'
-import { useHistory } from "react-router-dom";
 import Menu from './Menu'
 import Gallery from '../gallery'
+import Top from './Top'
+import HomePage from '../homePage'
+import Articles, { Writing } from '../articles'
+import {
+  Switch,
+  Route,
+} from "react-router-dom";
+
 
 export default function (props) {
 
-  const history = useHistory()
-
   const [bgImg, setBgImg] = useState('')
   const inputRef = useRef(null)
-  const [visible, setVisible] = useState(false)
   // const self = useRef({})
 
   useEffect(() => {
+
     axios.get('/userInfo').then((res) => {
       if (res.success === 'true') {
         res.data.backgroundImage && setBgImg('http://localhost:3001/' + res.data.backgroundImage)
+      } else {
+        message.info(res.msg)
       }
+    }).catch((err) => {
+      message.info('失败')
     })
   }, [])
-
-  const beforeUpload = useCallback((file) => {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader()
-      reader.onload = function (e) {
-        const prevBgImg = bgImg
-        setBgImg(e.target.result)
-        Modal.confirm({
-          title: '是否上传该背景图片?',
-          onOk: () => {
-            resolve()
-          },
-          onCancel: () => {
-            setBgImg(prevBgImg)
-            reject()
-          },
-          top: 50,
-          okText: '确定',
-          cancelText: '取消',
-          mask: false
-        })
-      }
-      reader.readAsDataURL(file);
-    })
-  })
 
   return (
     <div
       className='home-page-container'
       style={{
-        backgroundImage: `url(${require("../../assets/79547_top.jpg")})`,
+        backgroundImage: `url(${bgImg})`,
       }}>
-      <Drawer placement='top'>
-        <div className='top-container'>
-          <Upload
-            method='put'
-            action='http://localhost:3001/userInfo'
-            name='backgroundImage'
-            beforeUpload={beforeUpload}
-          >
-            <Button
-              type='borderless'
-              style={{ color: 'red' }}
-            >
-              更换背景
-            </Button>
-          </Upload>
-          <Button
-            type='borderless'
-            style={{ color: 'red' }}
-            onClick={() => {
-              // history.push('/login')
-            }}
-          >
-            登录
-          </Button>
-        </div>
-      </Drawer>
+      <Top bgImg={bgImg} setBgImg={setBgImg} />
       <Menu />
       <div className='home-page-content'>
-        <div style={{ background: '#fff', height: 100 }}>
-          <Gallery />
-        </div>
+        <Switch>
+          <Route path="/articles" strict>
+            <Articles />
+          </Route>
+          <Route path="/gallery" strict>
+            <Gallery />
+          </Route>
+          <Route path="/" strict>
+            <HomePage />
+          </Route>
+        </Switch>
       </div>
     </div>
   )

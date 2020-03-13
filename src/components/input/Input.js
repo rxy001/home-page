@@ -1,10 +1,8 @@
 import React from 'react'
 import './index.css'
 
-export default function Input(props) {
+export default function Input({ className, ...props }) {
   return (
-    <div>
-      <input type='text' className='input_component' {...props} />
-    </div>
+    <input type='text' className={`input_component ${className || ''}`} {...props} />
   )
 }

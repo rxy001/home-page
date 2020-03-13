@@ -33,17 +33,15 @@ export default function Form(props) {
 
     const validator = new schema(createRules());
 
-    console.log(self.current.formData)
-
     validator.validate(self.current.formData.data, (errors, fields) => {
       if (errors) {
-        console.log(errors)
         setError(errors.reduce((obj, err) => {
           obj[err.field] = err.message
           return obj
         }, {}))
       } else {
-        props.onSubmit(e)
+        setError({})
+        props.onSubmit(self.current.formData.data)
       }
     });
   }

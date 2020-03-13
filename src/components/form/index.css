@@ -1,0 +1,38 @@
+.input_component_error {
+  border: 1px solid #f5222d;
+  box-shadow: 0 0 3px 0 #f5222d;
+
+}
+
+.input_component_error:hover {
+  border-color: #f5222d;
+}
+
+.input_component_error:focus {
+  border-color: #f5222d;
+  box-shadow: 0 0 3px 0 #f5222d;
+}
+
+.form_item {
+  overflow: hidden;
+  padding-top: 5px;
+}
+
+.form_item_label {
+  width: 100px;
+  float: left;
+  line-height: 37px;
+  text-align: right;
+  padding: 0 10px;
+}
+
+.form_item_content {
+  height: 60px;
+  float: left;
+}
+
+.error_msg {
+  color: #f5222d;
+  margin-top: 5px;
+  font-size: 12px;
+}

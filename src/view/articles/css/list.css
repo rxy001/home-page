@@ -1,0 +1,53 @@
+.list_item {
+  border-top: 1px solid #e7eaf1;
+  padding: 20px;
+}
+
+.list_item_title {
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 1.55556;
+}
+
+.list_item_img {
+  width: 172px;
+  height: 96px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  float: left;
+  margin-right: 18px;
+}
+
+.list_item_content {
+  margin: 10px 0;
+}
+
+.list_item_intro {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  font-size: 15px;
+  line-height: 1.6;
+  height: 100px;
+}
+
+.list_item_time {
+  font-size: 14px;
+  color: #8590a6;
+  margin: 8px 0;
+}
+
+.articles_list {
+  width: 700px;
+  background: #fff;
+  margin: 0 auto;
+  box-shadow: 0 0 10px #eee;
+}
+
+.articles_warp {
+  background: #f6f6f6;
+  padding: 20px 0;
+}

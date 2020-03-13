@@ -1,0 +1,62 @@
+.writing-cover-wrapper {
+  width: 660px;
+  min-height: 192px;
+}
+
+.writing-title-input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  height: 100%;
+  width: 100%;
+  border: 0;
+  font-size: 32px;
+  line-height: 1.4;
+  font-weight: 600;
+  outline: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  resize: none;
+  overflow: auto;
+  box-sizing: border-box;
+}
+
+.writing-pre {
+  display: block;
+  visibility: hidden;
+  margin: 0;
+  font-size: 32px;
+  line-height: 1.4;
+  font-weight: 600;
+  padding: 2px;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+.writing-title-wrapper {
+  width: 100%;
+  margin: 16px 0;
+  position: relative;
+}
+
+.writing-upload {
+  background: #f6f6f6;
+  color: grey;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 660px;
+  min-height: 192px;
+}
+
+.writing-editWarpper {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  color: rgba(26, 26, 26, .75);
+  height: 42px;
+  color: #fff
+}

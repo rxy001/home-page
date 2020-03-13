@@ -83,7 +83,7 @@ function Message(props) {
     })
   }, [props.visible]);
 
-  const duration = 400;
+  const duration = 200;
 
   const defaultStyle = {
     // transform: 'translateY(-40%)',
@@ -91,7 +91,7 @@ function Message(props) {
 
   const transitionStyles = {
     entering: {
-      transition: `transform ${duration}ms ease`,
+      transition: `transform ${duration}ms linear`,
       transform: 'translateY(0)',
       position: 'relative',
       zIndex: -1,
@@ -100,7 +100,7 @@ function Message(props) {
       transform: 'translateY(0)',
     },
     exiting: {
-      transition: `transform ${duration}ms ease`,
+      transition: `transform ${duration}ms linear`,
       transform: 'translateY(-100%)'
     },
     exited: { transform: 'translateY(-40%)' },

@@ -8,12 +8,18 @@ import {
 import Root from './root'
 import { Provider } from "react-redux";
 import { store } from '../redux'
+import { Writing } from './articles'
 
 export default function App() {
   return (
     <Provider store={store}>
       <Router>
-        <Root />
+        <Switch>
+          <Route path='/writing' strict>
+            <Writing />
+          </Route>
+          <Root />
+        </Switch>
       </Router>
     </Provider>
   )

@@ -1,12 +1,14 @@
-import React, { useCallback } from 'react'
+import React, { useCallback, useState } from 'react'
 import { Upload, Button } from 'components'
 import './css/gallery.css'
 import CreateAlbum from './CreateAlbum'
 
 export default function (props) {
 
-  const createAlbum = useCallback(() => {
+  const [modalVisible, setModalVisible] = useState(false)
 
+  const createAlbum = useCallback(() => {
+    setModalVisible(true)
   })
 
   return (
@@ -20,7 +22,9 @@ export default function (props) {
         <Button type='primary'>上传图片/视频</Button>
         <Button style={{ marginLeft: 10 }} onClick={createAlbum}>创建相册</Button>
       </div>
-      <CreateAlbum />
+      <CreateAlbum visible={modalVisible} onCancel={() => {
+        setModalVisible(false)
+      }} />
     </div>
   )
 }
