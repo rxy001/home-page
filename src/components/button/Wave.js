@@ -15,7 +15,7 @@ export default function Wave(props) {
     node.setAttribute(attrName, 'false')
     node.removeEventListener('animationstart', onAnimationStart, false)
     node.removeEventListener('animationend', onAnimationEnd, false)
-  }, [getAttributeName])
+  }, [])
 
   const onAnimationStart = useCallback((e) => {
     if (!e || e.animationName !== 'waveEffect') {
@@ -28,7 +28,7 @@ export default function Wave(props) {
       return;
     }
     resetEffect(e.target, onAnimationStart, onAnimationEnd)
-  }, [resetEffect])
+  }, [])
 
   const onClick = useCallback((node, onAnimationStart, onAnimationEnd) => {
     const attrName = getAttributeName()
@@ -56,7 +56,7 @@ export default function Wave(props) {
     return () => {
       node.removeEventListener('click', listener)
     }
-  }, [onClick, resetEffect, onAnimationStart, onAnimationEnd])
+  }, [])
 
   useEffect(() => {
     const node = ref.current

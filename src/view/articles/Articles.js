@@ -9,13 +9,13 @@ function Item({ value }) {
       <a href='asdad'>
         <h3 className='list_item_title'>{value.title}</h3>
       </a>
-      <div className='list_item_time'><span>时间：{value.updatedAt}</span><span style={{ marginLeft: 20 }}>原创</span></div>
+      <div className='list_item_time'><span>时间：{value.createdTime}</span><span style={{ marginLeft: 20 }}>原创</span></div>
       <a href='ddd'>
         <div className='list_item_content'>
           <div style={{ backgroundImage: `url(${require('../../assets/avatar.jpeg')})` }} className='list_item_img' />
-          <p className='list_item_intro'>
+          <div className='list_item_intro'>
             {value.intro}
-          </p>
+          </div>
         </div>
       </a>
     </div>

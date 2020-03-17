@@ -56,7 +56,7 @@ export default function Drawer(props) {
     return `translate${horizontal ? 'X' : 'Y'}(${dis})`
   }, [horizontal])
 
-  const initialDis = useCallback(() => {
+  const initialDis = useCallback((placement) => {
     switch (placement) {
       case 'left':
       case 'top':
@@ -65,7 +65,7 @@ export default function Drawer(props) {
       case 'bottom':
         return '100%'
     }
-  }, [placement])
+  }, [])
 
   const defaultStyle = useMemo(() => ({
     transition: `transform ${duration}ms linear`,
@@ -75,15 +75,15 @@ export default function Drawer(props) {
     background: '#d2d2d238',
     position: 'fixed',
     overflow: 'hidden',
-    transform: translate(initialDis())
-  }), [placement, duration, initialDis, horizontal])
+    transform: translate(initialDis(placement))
+  }), [placement, duration, horizontal])
 
   const transitionStyles = useMemo(() => ({
     entering: { transform: translate(0) },
     entered: { transform: translate(0) },
-    exiting: { transform: translate(initialDis()) },
-    exited: { transform: translate(initialDis()) },
-  }), [translate, initialDis])
+    exiting: { transform: translate(initialDis(placement)) },
+    exited: { transform: translate(initialDis(placement)) },
+  }), [translate, placement])
 
   const renderChildren = useCallback(() => {
     if (React.isValidElement(children)) {

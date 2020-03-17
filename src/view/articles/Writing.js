@@ -94,10 +94,11 @@ export default function (props) {
         <Button onClick={() => {
           axios.post('/articles', {
             content: editorState.toHTML(),
-            intro: editorState.toText().slice(0, 200),
+            intro: editorState.toText().slice(0, 300),
             title,
             img: '',
-            author: 'rxy'
+            author: 'rxy',
+            createdTime: new Date().toLocaleDateString()
           }).then(() => {
 
           })
