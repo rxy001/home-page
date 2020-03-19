@@ -4,8 +4,7 @@ import PropTypes from 'prop-types'
 
 export default function Drawer(props) {
   const [visible, setVisible] = useState(false)
-  const barRef = useRef(null)
-  const childrenRef = useRef(null)
+  const childrenRef = useRef({})
 
   const { placement, duration, showThresholds, children, afterVisibleChange } = props
 
@@ -42,7 +41,7 @@ export default function Drawer(props) {
     return () => {
       document.body.removeEventListener('mousemove', callback)
     }
-  }, [childrenRef])
+  }, [childrenRef.current])
 
   const horizontal = useMemo(() => {
     if (['top', 'bottom'].includes(placement)) {
@@ -111,7 +110,6 @@ export default function Drawer(props) {
     >
       {state => (
         <div
-          ref={barRef}
           style={{
             ...defaultStyle,
             ...transitionStyles[state],

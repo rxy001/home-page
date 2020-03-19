@@ -1,7 +1,20 @@
-import React, { useRef, useState, useCallback } from 'react'
+import React, { useRef, useState, useReducer, useCallback } from 'react'
 import schema from 'async-validator';
 
 export const FormDataContext = React.createContext({})
+
+const createRules = (children) => {
+  const rules = {}
+  React.Children.forEach(children, (child) => {
+    if (React.isValidElement(child) && Array.isArray(child.props.rules)) {
+      const { fieldName, rules: childRules } = child.props
+      rules[fieldName] = childRules
+    }
+  })
+  return rules
+}
+
+
 
 export default function Form(props) {
 
@@ -16,23 +29,9 @@ export default function Form(props) {
     },
   })
 
-  const createRules = () => {
-    const rules = {}
-    React.Children.forEach(props.children, (child) => {
-      if (React.isValidElement(child) && Array.isArray(child.props.rules)) {
-        const { fieldName, rules: childRules } = child.props
-        rules[fieldName] = childRules
-      }
-    })
-    return rules
-  }
-
-  const onSubmit = (e) => {
-
+  const onSubmit = useCallback((e) => {
     e.preventDefault()
-
-    const validator = new schema(createRules());
-
+    const validator = new schema(createRules(props.children));
     validator.validate(self.current.formData.data, (errors, fields) => {
       if (errors) {
         setError(errors.reduce((obj, err) => {
@@ -44,18 +43,22 @@ export default function Form(props) {
         props.onSubmit(self.current.formData.data)
       }
     });
-  }
+  }, [props.onSubmit])
+
+  const renderFormItem = useCallback((children) => {
+    return React.Children.map(children, (child) => {
+      const fieldName = child.props.fieldName
+      const error = fieldName ? errors[fieldName] : void 233
+      return (
+        React.cloneElement(child, { error })
+      )
+    })
+  }, [errors])
 
   return (
     <form onSubmit={onSubmit} target='_blank'>
       <FormDataContext.Provider value={self.current.formData}>
-        {React.Children.map(props.children, (child) => {
-          const fieldName = child.props.fieldName
-          const error = fieldName ? errors[fieldName] : void 233
-          return (
-            React.cloneElement(child, { error })
-          )
-        })}
+        {renderFormItem(props.children)}
       </FormDataContext.Provider>
     </form>
   )
