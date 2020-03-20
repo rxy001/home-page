@@ -2,6 +2,8 @@
   height: 50px;
   display: flex;
   align-items: center;
+  justify-content: flex-end;
+  padding: 0 50px;
 }
 
 .home-page-container {
@@ -9,14 +11,13 @@
   height: 100%;
   background-position: right top;
   background-repeat: no-repeat;
-  background-color: rgb(49, 34, 31);
   overflow: auto;
+  padding-bottom: 100px;
 }
 
 .home-page-content {
   max-width: 1750px;
   padding: 0 100px;
-  margin: 230px auto;
   /* border: 15px solid #fff; */
   /* border-radius: 10px; */
   /* background: #fff; */

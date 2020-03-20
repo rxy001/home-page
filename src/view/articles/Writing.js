@@ -9,11 +9,12 @@ export default function (props) {
 
   const [editorState, handleChange] = useState(BraftEditor.createEditorState(null))
   const [bgImg, setBgImg] = useState('')
+  const [imgFile, setImgFile] = useState({})
   const spanRef = useRef(null)
   const [title, setTitle] = useState('')
 
   const editorControls = [
-    'font-size', 'font-family', 'bold', 'italic', 'text-indent', 'link', 'headings', 'list-ul', 'list-ol',
+    'font-size', 'font-family', 'line-height', 'bold', 'italic', 'text-indent', 'link', 'headings', 'list-ul', 'list-ol',
     'blockquote', 'code', 'separator', 'text-align', 'media', 'clear'
   ]
 
@@ -21,6 +22,7 @@ export default function (props) {
     const reader = new FileReader()
     reader.onload = function (e) {
       setBgImg(e.target.result)
+      setImgFile(file)
     }
     reader.readAsDataURL(file);
     return false
@@ -92,14 +94,15 @@ export default function (props) {
           }}
         />
         <Button onClick={() => {
-          axios.post('/articles', {
-            content: editorState.toHTML(),
-            intro: editorState.toText().slice(0, 300),
-            title,
-            img: '',
-            author: 'rxy',
-            createdTime: new Date().toLocaleDateString()
-          }).then(() => {
+          const formData = new FormData()
+          formData.append('content', editorState.toHTML())
+          formData.append('intro', editorState.toText().slice(0, 300))
+          formData.append('title', title)
+          formData.append('img', imgFile)
+          formData.append('author', 'rxy')
+          formData.append('createdTime', new Date().toLocaleDateString())
+
+          axios.post('/articlContent', formData).then(() => {
 
           })
         }}>

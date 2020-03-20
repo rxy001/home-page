@@ -40,6 +40,10 @@
   margin: 8px 0;
 }
 
+.list_item_time span{
+  margin-right: 20px;
+}
+
 .articles_list {
   width: 700px;
   background: #fff;
@@ -50,4 +54,7 @@
 .articles_warp {
   background: #f6f6f6;
   padding: 20px 0;
+  max-width: 990px;
+  margin: 0 auto;
+  min-width: 700px;
 }

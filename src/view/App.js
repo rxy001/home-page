@@ -8,16 +8,15 @@ import {
 import Root from './root'
 import { Provider } from "react-redux";
 import { store } from '../redux'
-import { Writing } from './articles'
+import { Writing, Content } from './articles'
 
 export default function App() {
   return (
     <Provider store={store}>
       <Router>
         <Switch>
-          <Route path='/writing' strict>
-            <Writing />
-          </Route>
+          <Route path='/content/:id' exact strict component={Content} />
+          <Route path='/writing' exact component={Writing} />
           <Root />
         </Switch>
       </Router>

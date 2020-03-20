@@ -20,10 +20,9 @@ export default function (props) {
   // const self = useRef({})
 
   useEffect(() => {
-
     axios.get('/userInfo').then((res) => {
       if (res.success === 'true') {
-        res.data.backgroundImage && setBgImg('http://localhost:3001/' + res.data.backgroundImage)
+        res.data.backgroundImage && setBgImg(res.data.backgroundImage)
       } else {
         message.info(res.msg)
       }
@@ -38,9 +37,10 @@ export default function (props) {
       style={{
         backgroundImage: `url(${bgImg})`,
       }}>
+      {/* <Button style={{width: 300, height: 300, margin: 200}}>sdadas</Button> */}
       <Top bgImg={bgImg} setBgImg={setBgImg} />
-      <Menu />
       <div className='home-page-content'>
+        <Menu />
         <Switch>
           <Route path="/articles" strict>
             <Articles />

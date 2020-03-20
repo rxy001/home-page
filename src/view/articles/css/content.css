@@ -1,0 +1,36 @@
+.content-wrap {
+  width: 690px;
+  margin: 0 auto;
+}
+
+.media-wrap.image-wrap {
+  text-align: center
+}
+
+.media-wrap.image-wrap img {
+  width: 100%;
+}
+
+.content-title {
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 1.22;
+  margin: 24px 0;
+  word-wrap: break-word;
+}
+
+.content-img {
+  display: block;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.content-basicInfo {
+  font-size: 17px;
+  color: #8590a6;
+  margin-bottom: 10px;
+}
+
+.content-basicInfo span {
+  margin-right: 20px
+}
